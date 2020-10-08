@@ -36,16 +36,9 @@ export class SwHeroesComponent implements OnInit {
       this.router1.navigate([], { queryParams: { page: data } });
     });
 
-    this.pagination$ = this.paginatorRef.pageChanges.pipe(
-      switchMap((page) => {
-        const requestFn = () => this.heroesService.getPage(String(page), '');
-        return this.paginatorRef.getPage(requestFn);
-      })
-    );
-
     this.input.valueChanges.pipe(debounceTime(500)).subscribe((val) => {
       if (val) {
-        this.router1.navigate([], { queryParams: { search: val } });
+        this.router1.navigate([], { queryParams: { page: 1, search: val } });
       } else {
         this.router1.navigate([], {
           queryParams: { page: this.currentPage.value },
@@ -53,22 +46,16 @@ export class SwHeroesComponent implements OnInit {
       }
     });
 
-    this.route.queryParams
-      .pipe(startWith({ page: '1' }))
-      .subscribe((p: { page: string; search: string }) => {
-        if (p.page) {
-          this.pagination$ = this.paginatorRef.pageChanges.pipe(
-            switchMap((page) => {
-              const requestFn = () =>
-                this.heroesService.getPage(String(page), '');
-              return this.paginatorRef.getPage(requestFn);
-            })
-          );
-          this.paginatorRef.setPage(+p.page);
-        } else if (p.search) {
-          this.pagination$ = this.heroesService.getPage('1', p.search);
-        }
-      });
+    this.pagination$ = this.route.queryParams.pipe(
+      startWith({ page: '1', search: '' }),
+      switchMap((queryData: { page: string; search: string }) => {
+        const requestFn = () =>
+          this.heroesService.getPage(queryData.page, queryData.search);
+        return this.paginatorRef
+          .getPage(requestFn)
+          .pipe(tap(() => this.paginatorRef.setPage(+queryData.page)));
+      })
+    );
   }
 
   goPrevPage(): void {
