@@ -1,0 +1,8 @@
+.paginator-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.paginator-container li {
+  cursor: pointer;
+}

@@ -118,6 +118,61 @@
           }
         }
       }
+    },
+    "task4-feature-heroes": {
+      "projectType": "library",
+      "root": "libs/task4/feature-heroes",
+      "sourceRoot": "libs/task4/feature-heroes/src",
+      "prefix": "myorg",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/task4/feature-heroes/tsconfig.lib.json",
+              "libs/task4/feature-heroes/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/task4/feature-heroes/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/task4/feature-heroes/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "task4-data-access-heroes": {
+      "projectType": "library",
+      "root": "libs/task4/data-access-heroes",
+      "sourceRoot": "libs/task4/data-access-heroes/src",
+      "prefix": "myorg",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/task4/data-access-heroes/tsconfig.lib.json",
+              "libs/task4/data-access-heroes/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/task4/data-access-heroes/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/task4/data-access-heroes/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

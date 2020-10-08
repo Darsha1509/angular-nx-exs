@@ -29,6 +29,12 @@
     "sw-search-e2e": {
       "tags": [],
       "implicitDependencies": ["sw-search"]
+    },
+    "task4-feature-heroes": {
+      "tags": []
+    },
+    "task4-data-access-heroes": {
+      "tags": []
     }
   }
 }

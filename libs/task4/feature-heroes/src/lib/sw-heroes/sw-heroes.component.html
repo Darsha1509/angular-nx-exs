@@ -1,0 +1,31 @@
+<div>
+  <input type="text" [formControl]="input" />
+</div>
+
+<div class="data-container">
+  <ng-container *ngIf="pagination$ | async as pagination">
+    <p *ngFor="let user of pagination.data">
+      <b>Name:</b> {{ user.name }} <b>Birth year:</b> {{ user.birth_year }}
+      <b>Gender:</b>
+      {{ user.gender }}
+    </p>
+
+    <nav>
+      <ul class="paginator-container">
+        <li [class.disabled]="paginatorRef.isFirst" (click)="goPrevPage()">
+          <a>Previous</a>
+        </li>
+        <li
+          [class.active]="paginatorRef.isPageActive(page)"
+          (click)="goToPage(page)"
+          *ngFor="let page of pagination.pageControls"
+        >
+          <a>{{ page }}</a>
+        </li>
+        <li [class.disabled]="paginatorRef.isLast" (click)="goNextPage()">
+          <a>Next</a>
+        </li>
+      </ul>
+    </nav>
+  </ng-container>
+</div>

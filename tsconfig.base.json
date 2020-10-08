@@ -15,7 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@myorg/task4/feature-heroes": ["libs/task4/feature-heroes/src/index.ts"],
+      "@myorg/task4/data-access-heroes": [
+        "libs/task4/data-access-heroes/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
